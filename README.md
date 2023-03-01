@@ -10,3 +10,8 @@ Images to PDF - Convert multiples images to a single PDF
 [Example]
          img2pdf.py --images "img1.jpg,img2.jpg,img3.jpg" --pdf "file.pdf"
 ```
+
+## Requirements
+```python
+pip3.10 install Pilow
+```
