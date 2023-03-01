@@ -1,5 +1,5 @@
 # img2pdf
-Convert from images to PDF (because I'm out of shitty software like Adobe and all)
+Convert from images to PDF (because I'm out of shitty softwares like Adobe and bullshit online tools)
 
 ## How to use
 ```
