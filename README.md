@@ -13,5 +13,7 @@ Images to PDF - Convert multiples images to a single PDF
 
 ## Requirements
 ```python
-pip3.10 install Pilow
+pip3.10 install Pillow
+
+# pip3.10 install -r requirements.txt
 ```
