@@ -59,7 +59,11 @@ def img_to_pdf():
         img_to_save = []
 
         # Get the first image to attach other one to it
-        img_first = Image.open(raw_img_list["images"][0])
+        try:
+            img_first = Image.open(raw_img_list["images"][0])
+        except FileNotFoundError as err:
+            print(f"ERROR ({err}) - File Not Found!")
+            sys.exit(1)
 
         # List all images in raw images list "start at 1 (so the second one)"
         for image in raw_img_list["images"][1:]:
