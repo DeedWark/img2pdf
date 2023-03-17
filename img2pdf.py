@@ -1,4 +1,4 @@
-#!/usr/bin/env python3.10
+#!/usr/bin/env python3.11
 # Description: Convert from images to PDF (because I'm out of shitty software like Adobe and all)
 # Author: DeedWark <github.com/DeedWark>
 # Date: 2023-02-28
@@ -15,9 +15,19 @@ from PIL import Image
 
 def arg_parser():
     """ Parse all arguments """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--images", type=str)
-    parser.add_argument("--pdf", type=str)
+    parser = argparse.ArgumentParser(
+            description='Images to PDF - Convert multiples images to a single PDF',
+            epilog="example: {} --images \"img1.jpg,img2.png,img3.jpeg\" --pdf \"myfile.pdf\"".format(sys.argv[0]))
+    parser.add_argument(
+            "--images",
+            type = str,
+            help = "Put your images here (comma separated)",
+            metavar = '<images.jpg/png>')
+    parser.add_argument(
+            "--pdf",
+            type = str,
+            help = "Name of the PDF file to create",
+            metavar = '<filename.pdf>')
     args = parser.parse_args()
     if args.images is None:
         show_help()
@@ -30,7 +40,9 @@ def show_help():
     print(f"""\
 Images to PDF - Convert multiples images to a single PDF
 
-[Usage] 
+[Usage]: img2pdf.py [-h] [--images <images.jpg/png>] [--pdf <filename.pdf>]
+
+[Options] 
          --images,  Put your images here (comma separated)
          --pdf,     Specify the PDF filename (Default: final.pdf)
 
