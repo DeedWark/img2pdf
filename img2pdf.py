@@ -13,27 +13,29 @@ import argparse
 import sys
 from PIL import Image
 
+
 def arg_parser():
     """ Parse all arguments """
     parser = argparse.ArgumentParser(
-            description='Images to PDF - Convert multiples images to a single PDF',
-            epilog="example: {} --images \"img1.jpg,img2.png,img3.jpeg\" --pdf \"myfile.pdf\"".format(sys.argv[0]))
+        description='Images to PDF - Convert multiples images to a single PDF',
+        epilog=f"{sys.argv[0]} --images \"img1.jpg,img2.png,img3.jpeg\" --pdf \"myfile.pdf\"")
     parser.add_argument(
-            "--images",
-            type = str,
-            help = "Put your images here (comma separated)",
-            metavar = '<images.jpg/png>')
+        "--images",
+        type=str,
+        help="Put your images here (comma separated)",
+        metavar='<images.jpg/png>')
     parser.add_argument(
-            "--pdf",
-            type = str,
-            help = "Name of the PDF file to create",
-            metavar = '<filename.pdf>')
+        "--pdf",
+        type=str,
+        help="Name of the PDF file to create",
+        metavar='<filename.pdf>')
     args = parser.parse_args()
     if args.images is None:
         show_help()
         sys.exit(1)
 
     return args
+
 
 def show_help():
     """ Show help """
@@ -50,6 +52,7 @@ Images to PDF - Convert multiples images to a single PDF
          {sys.argv[0]} --images \"img1.jpg,img2.jpg,img3.jpg\" --pdf \"file.pdf\"
     """)
 
+
 def img_to_pdf():
     """ Convert all specified images to a single one PDF """
 
@@ -65,7 +68,8 @@ def img_to_pdf():
     # If --images is not empty
     if "images" in raw_img_list.keys():
         # Strip and split ' ' and ','
-        raw_img_list["images"] = [image.strip() for image in raw_img_list["images"].split(",")]
+        raw_img_list["images"] = [image.strip()
+                                  for image in raw_img_list["images"].split(",")]
 
         # Init list
         img_to_save = []
@@ -82,16 +86,18 @@ def img_to_pdf():
             # Open raw image
             img = Image.open(image)
             # Convert image to RGB
-            img_converted  = img.convert('RGB')
+            img_converted = img.convert('RGB')
             # Add convert imge to new list
             img_to_save.append(img_converted)
 
         # Attach other converted image to the first one and convert to PDF
         img_first.save(pdf_file, save_all=True, append_images=img_to_save)
 
+
 def main():
     """ MAIN """
     img_to_pdf()
+
 
 if __name__ == '__main__':
     main()
