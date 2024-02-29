@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.11
-# Description: Convert from images to PDF (because I'm out of shitty software like Adobe and all)
+# Description: Convert from images to pdf
+#              (because I'm out of shitty software like Adobe and all)
 # Author: DeedWark <github.com/DeedWark>
 # Date: 2023-02-28
 # Version: 1.0.0
@@ -15,20 +16,23 @@ from PIL import Image
 
 
 def arg_parser():
-    """ Parse all arguments """
+    """Parse all arguments"""
     parser = argparse.ArgumentParser(
-        description='Images to PDF - Convert multiples images to a single PDF',
-        epilog=f"{sys.argv[0]} --images \"img1.jpg,img2.png,img3.jpeg\" --pdf \"myfile.pdf\"")
+        description="Images to PDF - Convert multiples images to a single PDF",
+        epilog=f'{sys.argv[0]} --images "img1.jpg,img2.png" --pdf myfile.pdf',
+    )
     parser.add_argument(
         "--images",
         type=str,
         help="Put your images here (comma separated)",
-        metavar='<images.jpg/png>')
+        metavar="<images.jpg/png>",
+    )
     parser.add_argument(
         "--pdf",
         type=str,
         help="Name of the PDF file to create",
-        metavar='<filename.pdf>')
+        metavar="<filename.pdf>",
+    )
     args = parser.parse_args()
     if args.images is None:
         show_help()
@@ -38,23 +42,25 @@ def arg_parser():
 
 
 def show_help():
-    """ Show help """
-    print(f"""\
+    """Show help"""
+    print(
+        f"""\
 Images to PDF - Convert multiples images to a single PDF
 
 [Usage]: img2pdf.py [-h] [--images <images.jpg/png>] [--pdf <filename.pdf>]
 
-[Options] 
+[Options]
          --images,  Put your images here (comma separated)
          --pdf,     Specify the PDF filename (Default: final.pdf)
 
 [Example]
-         {sys.argv[0]} --images \"img1.jpg,img2.jpg,img3.jpg\" --pdf \"file.pdf\"
-    """)
+         {sys.argv[0]} --images \"img1.jpg,img2.jpg\" --pdf \"file.pdf\"
+    """
+    )
 
 
 def img_to_pdf():
-    """ Convert all specified images to a single one PDF """
+    """Convert all specified images to a single one PDF"""
 
     # PDF File
     if arg_parser().pdf:
@@ -68,8 +74,9 @@ def img_to_pdf():
     # If --images is not empty
     if "images" in raw_img_list.keys():
         # Strip and split ' ' and ','
-        raw_img_list["images"] = [image.strip()
-                                  for image in raw_img_list["images"].split(",")]
+        raw_img_list["images"] = [
+            image.strip() for image in raw_img_list["images"].split(",")
+        ]
 
         # Init list
         img_to_save = []
@@ -86,7 +93,7 @@ def img_to_pdf():
             # Open raw image
             img = Image.open(image)
             # Convert image to RGB
-            img_converted = img.convert('RGB')
+            img_converted = img.convert("RGB")
             # Add convert imge to new list
             img_to_save.append(img_converted)
 
@@ -95,9 +102,9 @@ def img_to_pdf():
 
 
 def main():
-    """ MAIN """
+    """MAIN"""
     img_to_pdf()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
